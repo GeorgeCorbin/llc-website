@@ -1,34 +1,41 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { featureFlags } from "@/config/featureFlags";
 
-const navLinks = [
+type NavLink = { href: string; label: string; feature?: keyof typeof featureFlags };
+
+const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/services", label: "Services", feature: "services" },
+  { href: "/pricing", label: "Pricing", feature: "pricing" },
+  { href: "/portfolio", label: "Portfolio", feature: "portfolio" },
+  { href: "/about", label: "About", feature: "about" },
+  { href: "/contact", label: "Contact", feature: "contact" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const availableLinks = useMemo(
+    () => navLinks.filter((link) => !link.feature || featureFlags[link.feature]),
+    []
+  );
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#EDEDED]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl font-bold text-[#1A1A1A]">
+            <span className="text-2xl font-montserrat font-bold text-[#1A1A1A]">
               Corbin<span className="text-[#FF6B2C]">.</span>
             </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {availableLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -37,9 +44,11 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link href="/contact" className="btn-primary">
-              Get Started
-            </Link>
+            {featureFlags.contact && (
+              <Link href="/contact" className="btn-primary">
+                Get Started
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -60,7 +69,7 @@ export default function Navbar() {
         {isOpen && (
           <div className="md:hidden py-4 border-t border-[#EDEDED]">
             <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
+              {availableLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -70,13 +79,15 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/contact"
-                className="btn-primary text-center mt-2"
-                onClick={() => setIsOpen(false)}
-              >
-                Get Started
-              </Link>
+              {featureFlags.contact && (
+                <Link
+                  href="/contact"
+                  className="btn-primary text-center mt-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Get Started
+                </Link>
+              )}
             </div>
           </div>
         )}

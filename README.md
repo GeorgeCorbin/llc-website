@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Corbin Software Solutions Website
+
+Marketing site for Corbin Software Solutions built with Next.js 16 (App Router), Tailwind CSS v4 pipelines, Prisma, and PostgreSQL. Includes a portfolio, pricing, services, contact form (Prisma-backed API route), and legal pages, plus feature flags to toggle sections without redeploying.
+
+## Tech Stack
+
+- Next.js 16 + App Router
+- TypeScript + Tailwind CSS (new `@import "tailwindcss"` pipeline)
+- Prisma ORM + PostgreSQL
+- Lucide icons
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ```bash
+   npm install
+   ```
+2. Copy `.env` and fill in secrets
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   cp .env .env.local
+   ```
+3. Start the dev server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   npm run dev
+   ```
+4. Optional: push schema to your database
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   npx prisma db push
+   ```
 
-## Learn More
+## Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Default | Description |
+| --- | --- | --- |
+| `DATABASE_URL` | `postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public` | Postgres connection used by Prisma. Required for `npx prisma db push` and runtime queries. |
+| `NEXT_PUBLIC_SITE_URL` | `https://www.corbinsw.com` | Base URL used in sitemap, robots, `ai.txt`, and canonical links. |
+| `NEXT_PUBLIC_ENABLE_SERVICES` | `true` | Toggle `/services` page + navigation link. |
+| `NEXT_PUBLIC_ENABLE_PRICING` | `true` | Toggle `/pricing`. |
+| `NEXT_PUBLIC_ENABLE_PORTFOLIO` | `true` | Toggle `/portfolio`. |
+| `NEXT_PUBLIC_ENABLE_ABOUT` | `true` | Toggle `/about`. |
+| `NEXT_PUBLIC_ENABLE_CONTACT` | `true` | Toggle `/contact` and CTA button. |
+| `NEXT_PUBLIC_ENABLE_PRIVACY` | `true` | Toggle `/privacy`. |
+| `NEXT_PUBLIC_ENABLE_TERMS` | `true` | Toggle `/terms`. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Set any flag to `"false"` to automatically 404 the corresponding page and hide it from navigation/sitemap.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Feature Flags
 
-## Deploy on Vercel
+Feature flags live in `src/config/featureFlags.ts`. Use `ensureFeatureEnabled("contact")` inside page files to gate access; navigation links read the config as well. Update `.env` to flip sections on/off.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## SEO / Crawl Files
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/app/robots.ts` – standard + GPT crawler rules with sitemap reference.
+- `src/app/ai.txt/route.ts` – AI usage policy (`/ai.txt`).
+- `src/app/sitemap.ts` – dynamically includes only enabled pages.
+
+## Useful Scripts
+
+| Script | Description |
+| --- | --- |
+| `npm run dev` | Start local dev server with Turbopack. |
+| `npm run build` | Production build. |
+| `npm run start` | Start production server. |
+| `npx prisma studio` | Inspect/update DB data via Prisma Studio. |
+| `npx prisma db push` | Apply schema changes to your database. |
+
+## Deployment
+
+Deploy to Vercel or any Node-compatible host. Ensure `.env` values are configured in your deployment platform and run `prisma generate`/`prisma db push` as part of your pipeline if needed. Continuous deployment is easiest via Vercel connected to GitHub.

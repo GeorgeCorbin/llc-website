@@ -1,11 +1,12 @@
 import { Check, ArrowRight, HelpCircle } from "lucide-react";
 import Link from "next/link";
+import { ensureFeatureEnabled } from "@/utils/featureGuard";
 
 const pricingPlans = [
   {
     name: "Starter",
     description: "Perfect for small businesses and landing pages",
-    price: "2,500",
+    price: "1,200",
     priceNote: "starting at",
     features: [
       "Single page website",
@@ -21,7 +22,7 @@ const pricingPlans = [
   {
     name: "Professional",
     description: "Ideal for growing businesses needing more features",
-    price: "5,000",
+    price: "2,500",
     priceNote: "starting at",
     features: [
       "Multi-page website (up to 5 pages)",
@@ -60,7 +61,7 @@ const mobilePricing = [
   {
     name: "MVP App",
     description: "Launch your idea quickly with core features",
-    price: "10,000",
+    price: "4,000",
     priceNote: "starting at",
     features: [
       "Single platform (iOS or Android)",
@@ -76,7 +77,7 @@ const mobilePricing = [
   {
     name: "Full App",
     description: "Complete mobile solution for both platforms",
-    price: "25,000",
+    price: "9,000",
     priceNote: "starting at",
     features: [
       "iOS and Android",
@@ -103,7 +104,7 @@ const faqs = [
   },
   {
     question: "What about ongoing maintenance?",
-    answer: "We offer optional maintenance packages starting at $200/month that include hosting, security updates, backups, and minor content updates.",
+    answer: "We offer optional maintenance packages starting at $75/month that include hosting, security updates, backups, and minor content updates.",
   },
   {
     question: "How long does a typical project take?",
@@ -116,6 +117,7 @@ const faqs = [
 ];
 
 export default function PricingPage() {
+  ensureFeatureEnabled("pricing");
   return (
     <div className="pt-16">
       {/* Hero Section */}

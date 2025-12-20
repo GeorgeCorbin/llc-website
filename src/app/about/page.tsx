@@ -1,5 +1,6 @@
 import { Target, Users, Zap, Award, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { ensureFeatureEnabled } from "@/utils/featureGuard";
 
 const values = [
   {
@@ -48,6 +49,7 @@ const process = [
 ];
 
 export default function AboutPage() {
+  ensureFeatureEnabled("about");
   return (
     <div className="pt-16">
       {/* Hero Section */}

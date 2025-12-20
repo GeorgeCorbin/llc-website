@@ -1,5 +1,6 @@
 import { Code2, Smartphone, ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { ensureFeatureEnabled } from "@/utils/featureGuard";
 
 const services = [
   {
@@ -39,6 +40,7 @@ const services = [
 ];
 
 export default function ServicesPage() {
+  ensureFeatureEnabled("services");
   return (
     <div className="pt-16">
       {/* Hero Section */}

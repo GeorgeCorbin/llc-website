@@ -1,5 +1,6 @@
 import { ExternalLink, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { ensureFeatureEnabled } from "@/utils/featureGuard";
 
 const projects = [
   {
@@ -61,6 +62,7 @@ const projects = [
 const categories = ["All", "Web Development", "Mobile App"];
 
 export default function PortfolioPage() {
+  ensureFeatureEnabled("portfolio");
   return (
     <div className="pt-16">
       {/* Hero Section */}

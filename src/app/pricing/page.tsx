@@ -61,7 +61,7 @@ const mobilePricing = [
   {
     name: "MVP App",
     description: "Launch your idea quickly with core features",
-    price: "4,000",
+    price: "2,000",
     priceNote: "starting at",
     features: [
       "Single platform (iOS or Android)",
@@ -77,7 +77,7 @@ const mobilePricing = [
   {
     name: "Full App",
     description: "Complete mobile solution for both platforms",
-    price: "9,000",
+    price: "5,000",
     priceNote: "starting at",
     features: [
       "iOS and Android",

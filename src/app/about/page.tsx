@@ -76,8 +76,8 @@ export default function AboutPage() {
               <div className="text-gray-600">Years of Experience</div>
               <div className="grid grid-cols-2 gap-8 mt-8">
                 <div>
-                  <div className="text-3xl font-bold text-[#1A1A1A]">50+</div>
-                  <div className="text-gray-600 text-sm">Projects Completed</div>
+                  <div className="text-3xl font-bold text-[#1A1A1A]">15+</div>
+                  <div className="text-gray-600 text-sm">Projects Shipped</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-[#1A1A1A]">100%</div>

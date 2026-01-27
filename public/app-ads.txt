@@ -1,0 +1,4 @@
+# app-ads.txt for Corbin Solution mobile apps
+# Unit Converter (App ID: ca-app-pub-6540769150009439~8240636729)
+# AdMob bottom-banner unit: ca-app-pub-6540769150009439/4387461121
+google.com, pub-6540769150009439, DIRECT, f08c47fec0942fa0

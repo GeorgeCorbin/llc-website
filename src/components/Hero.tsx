@@ -35,21 +35,21 @@ export default function Hero() {
           {/* Highlights */}
           <div className="flex flex-wrap justify-center gap-4 mt-20 max-w-3xl mx-auto">
             <div className="flex items-center gap-3 bg-white shadow-sm border border-gray-100 px-4 py-3 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-[#FF6B2C]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#FF6B2C]" />
               <div className="text-left">
                 <div className="text-sm text-gray-500">Personal developer</div>
                 <div className="text-base font-semibold text-[#1A1A1A]">Direct access, no handoffs</div>
               </div>
             </div>
             <div className="flex items-center gap-3 bg-white shadow-sm border border-gray-100 px-4 py-3 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-[#FF6B2C]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#FF6B2C]" />
               <div className="text-left">
                 <div className="text-sm text-gray-500">Hands-on delivery</div>
                 <div className="text-base font-semibold text-[#1A1A1A]">Design, build, ship end-to-end</div>
               </div>
             </div>
             <div className="flex items-center gap-3 bg-white shadow-sm border border-gray-100 px-4 py-3 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-[#FF6B2C]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#FF6B2C]" />
               <div className="text-left">
                 <div className="text-sm text-gray-500">Responsive in hours</div>
                 <div className="text-base font-semibold text-[#1A1A1A]">Clear timelines & weekly demos</div>

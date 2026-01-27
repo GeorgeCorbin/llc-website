@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage() {
           </h1>
           <p className="text-gray-600 mb-2">Effective Date: {lastUpdated}</p>
           <p className="text-gray-600">
-            Corbin Software Solutions LLC ("Corbin", "we", "our") is committed to protecting your privacy and
+            Corbin Software Solutions LLC (&quot;Corbin&quot;, &quot;we&quot;, &quot;our&quot;) is committed to protecting your privacy and
             handling your data transparently. This policy explains how we collect, use, and safeguard information when
             you interact with us online or engage our services.
           </p>

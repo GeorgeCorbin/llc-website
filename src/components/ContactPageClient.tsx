@@ -65,7 +65,7 @@ export default function ContactPageClient() {
         budget: "",
         message: "",
       });
-    } catch (err) {
+    } catch {
       setError("Something went wrong. Please try again or email us directly.");
     } finally {
       setIsSubmitting(false);

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Code2, Smartphone, ArrowRight, Palette, Database, Cloud, Shield } from "lucide-react";
+import { Code2, Smartphone, ArrowRight } from "lucide-react";
 
 const services = [
   {

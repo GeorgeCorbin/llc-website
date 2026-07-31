@@ -11,14 +11,14 @@
     "create-user": "tsx scripts/create-user.ts"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.2.0",
-    "@prisma/client": "^7.2.0",
+    "@prisma/adapter-pg": "^7.9.1",
+    "@prisma/client": "^7.9.1",
     "bcryptjs": "^3.0.3",
     "jose": "^6.2.6",
     "lucide-react": "^0.562.0",
-    "next": "16.1.0",
+    "next": "16.2.12",
     "pg": "^8.16.3",
-    "prisma": "^7.2.0",
+    "prisma": "^7.9.1",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
@@ -29,9 +29,13 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.1.0",
+    "eslint-config-next": "16.2.12",
     "tailwindcss": "^4",
     "tsx": "^4.23.1",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "^8.5.25",
+    "sharp": "^0.35.3"
   }
 }

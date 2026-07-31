@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Loader2 } from "lucide-react";
 
 export default function LoginForm() {
@@ -81,20 +82,28 @@ export default function LoginForm() {
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {isSubmitting ? (
-          <>
-            <Loader2 className="w-5 h-5 animate-spin" />
-            Signing In...
-          </>
-        ) : (
-          "Sign In"
-        )}
-      </button>
+      <div className="flex items-center gap-3">
+        <Link
+          href="/"
+          className="flex-1 text-center px-4 py-3 rounded-lg border border-[#EDEDED] text-[#1A1A1A] font-medium hover:bg-[#EDEDED]/40 transition-colors"
+        >
+          Back to Site
+        </Link>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="flex-1 btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 className="w-5 h-5 animate-spin" />
+              Signing In...
+            </>
+          ) : (
+            "Sign In"
+          )}
+        </button>
+      </div>
     </form>
   );
 }

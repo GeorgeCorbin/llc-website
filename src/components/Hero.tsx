@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Code2, Smartphone } from "lucide-react";
+import { featureFlags } from "@/config/featureFlags";
 
 export default function Hero() {
   return (
@@ -27,9 +28,11 @@ export default function Hero() {
               Start Your Project
               <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link href="/portfolio" className="btn-secondary inline-flex items-center justify-center gap-2">
-              View Our Work
-            </Link>
+            {featureFlags.portfolio && (
+              <Link href="/portfolio" className="btn-secondary inline-flex items-center justify-center gap-2">
+                View Our Work
+              </Link>
+            )}
           </div>
 
           {/* Highlights */}

@@ -68,6 +68,108 @@ Feature flags live in `src/config/featureFlags.ts`. Use `ensureFeatureEnabled("c
 | `npx prisma studio` | Inspect/update DB data via Prisma Studio. |
 | `npx prisma db push` | Apply schema changes to your database. |
 
+## PostgreSQL
+
+### Production database
+
+This app does not bundle a Postgres server; it connects to one via `DATABASE_URL`. For production, use a managed Postgres provider such as:
+
+- Vercel Postgres
+- Supabase
+- Railway
+- Neon
+- AWS RDS
+- Google Cloud SQL
+
+Create a database and set `DATABASE_URL` to a valid Postgres connection string:
+
+```bash
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
+```
+
+### Local Postgres without Docker
+
+#### Ubuntu / Debian (AWS Lightsail)
+
+1. Install PostgreSQL:
+
+   ```bash
+   sudo apt update
+   sudo apt install -y postgresql postgresql-contrib
+   ```
+
+2. Start the service:
+
+   ```bash
+   sudo systemctl enable postgresql
+   sudo systemctl start postgresql
+   ```
+
+3. Create the database and set the `postgres` user password. Run `createdb` from a directory the `postgres` user can access (e.g. `/tmp`) to avoid permission errors:
+
+   ```bash
+   cd /tmp
+   sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'password';"
+   sudo -u postgres createdb -O postgres llc_db
+   ```
+
+4. Set `DATABASE_URL` and push the schema:
+
+   ```bash
+   DATABASE_URL="postgresql://postgres:password@localhost:5432/llc_db?schema=public" npx prisma db push
+   ```
+
+#### Homebrew (macOS)
+
+1. Install PostgreSQL:
+
+   ```bash
+   brew install postgresql@16
+   ```
+
+2. Start the service:
+
+   ```bash
+   brew services start postgresql@16
+   ```
+
+3. Create a database user and the database:
+
+   ```bash
+   createuser -s postgres
+   createdb -O postgres llc_db
+   ```
+
+4. Set `DATABASE_URL` and push the schema:
+
+   ```bash
+   DATABASE_URL="postgresql://postgres@localhost:5432/llc_db?schema=public" npx prisma db push
+   ```
+
+#### Postgres.app (macOS)
+
+1. Download and install [Postgres.app](https://postgresapp.com/).
+2. Open it and make sure the server is running.
+3. Set `DATABASE_URL` to the connection string shown in the app, then push the schema:
+
+   ```bash
+   DATABASE_URL="postgresql://localhost:5432/llc_db?schema=public" npx prisma db push
+   ```
+
+### Viewing contact messages
+
+If you need to inspect production `ContactInquiry` rows, use Prisma Studio:
+
+```bash
+DATABASE_URL="postgresql://..." npx prisma studio
+```
+
+Or connect with `psql`:
+
+```bash
+psql "$DATABASE_URL" -c "SELECT id, name, email, message, "createdAt" FROM \"ContactInquiry\" ORDER BY \"createdAt\" DESC LIMIT 50;"
+```
+
 ## Deployment
 
 Deploy to Vercel or any Node-compatible host. Ensure `.env` values are configured in your deployment platform and run `prisma generate`/`prisma db push` as part of your pipeline if needed. Continuous deployment is easiest via Vercel connected to GitHub.
